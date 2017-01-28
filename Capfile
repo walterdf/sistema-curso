@@ -17,7 +17,7 @@ require "capistrano/scm/git"
 install_plugin Capistrano::SCM::Git
 
 require 'capistrano/rails'
-require 'capistrano/passenger'
+
 
 require 'capistrano/rvm'
 set :rvm_type, :user
