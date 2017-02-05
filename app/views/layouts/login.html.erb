@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Editora Soluções - Painel de Acesso</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="icon" href="http://www.editorasolucao.com.br/media/favicon/default/icon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="http://www.editorasolucao.com.br/media/favicon/default/icon.png" type="image/x-icon" />
+    <link href="https://fonts.icasei.com.br/fonts.css?use=FaktSoftPro-Blond" rel=stylesheet />
+    <link href="https://fonts.icasei.com.br/fonts.css?use=FaktSoftPro-Medium" rel=stylesheet />
+    <link href="https://fonts.icasei.com.br/fonts.css?use=FaktSoftProNormal" rel=stylesheet />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+          * { font-family: "FaktSoftPro-Blond",Arial,Helvetica,sans-serif; }
+          body { background-color:#0366A7;font-family:"FaktSoftPro-Blond",Arial,Helvetica,sans-serif;position: absolute;left: 50%;top: 50%;-webkit-transform: translate(-50%, -50%);transform: translate(-50%, -50%);}
+          .box { width:320px;max-width:350px;}
+          .card { border-radius: 8px; padding: 20px; margin:.5rem 0 0 0; }
+          p.terms { font-size: 13px;text-align:center;color:#FFFFFF;margin:12px 0 0 0; }
+          h5 { text-align: center; color: #0366A7; font-weight: 900; font-family: "FaktSoftPro-Medium",Arial,Helvetica,sans-serif; }
+          .row { margin-bottom: 25px; }
+          input[type=password].valid, input[type=password]:focus.valid, input[type=email].valid, input[type=email]:focus.valid { border-bottom: 1px solid; box-shadow: 0 1px 0 0 #CCC; }
+          .input-field input[type=email]:focus + label, .input-field input[type=password]:focus + label {color: #0366A7;}
+          .input-field input[type=email]:focus, .input-field input[type=password]:focus {border-bottom: 1px solid #0366A7;box-shadow: 0 1px 0 0 #0366A7;}
+          input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea { margin: 0 0 5px 0; }
+          [type="checkbox"].filled-in:checked+label:after { border: 2px solid #0366A7; background-color: #0366A7; }
+          .valign-wrapper img { margin:auto; }
+          .row-logo { margin: 10px 0 15px 0; }
+          .row-form-submit { margin-top: 35px; margin-bottom: 0; }
+          .row-remember { float:left; padding-top: 7px; }
+          .row-submit { float: right; }
+          .btn, .btn-large { background-color:#0366A7; }
+          .btn:hover, .btn-large:hover { background-color:#023150; }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="row row-logo">
+        <div class="valign-wrapper">
+          <img width="172" height="54" src="images/materialize-logo.png">
+        </div>
+      </div>
+      <%= yield %>
+      <p class="terms">Editora Solução - Copyright © 2017</p>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+  </body>
+</html>

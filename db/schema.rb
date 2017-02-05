@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 20170201021016) do
 
   create_table "cursos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
+    t.string   "url_thumb"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -29,11 +30,16 @@ ActiveRecord::Schema.define(version: 20170201021016) do
   end
 
   create_table "usuarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "login"
+    t.string   "email"
     t.string   "password"
-    t.integer  "tipo_conta", limit: 1, default: 0
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.string   "nome_completo"
+    t.string   "telefone"
+    t.string   "celular"
+    t.string   "password_digest"
+    t.integer  "tipo_conta",      limit: 1, default: 0
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.index ["email"], name: "index_usuarios_on_email", using: :btree
   end
 
   create_table "videos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

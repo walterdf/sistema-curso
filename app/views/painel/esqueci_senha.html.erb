@@ -1,0 +1,20 @@
+<div class="card">
+    <div class="row row-logo">
+      <h5>Esqueceu sua senha?</h5>
+      <p>Informe seu e-mail abaixo para receber uma nova senha</p>
+    </div>
+    <div class="row">
+      <div class="input-field">
+        <input id="email" type="email" class="validate">
+        <label for="email" data-error="E-mail inválido">E-mail</label>
+      </div>
+    </div>
+    <div class="row row-form-submit">
+      <div class="row-remember">
+        <%=link_to "Fazer login", { :controller => "painel", :action => "index" } %>
+      </div>
+      <div class="row-submit">
+        <a class="btn disabled">Resetar Senha</a>
+      </div>
+    </div>
+</div>

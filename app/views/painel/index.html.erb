@@ -1,25 +1,26 @@
-
-<div class="box">
-  <div class="row row-logo">
-    <div class="valign-wrapper">
-      <img width="172" height="54" src="images/materialize-logo.png">
-    </div>
-  </div>
+<%= form_for :usuario, url: {action: "login"} do |f| %>
   <div class="card">
-    <form class="col s12 m7">
       <div class="row row-logo">
         <h5>Painel de Acesso</h5>
       </div>
+      <% if flash[:alert] %>
+        <div id="card-alert" class="card red" style="margin-bottom:25px;">
+          <div class="card-content white-text" style="padding:0;">
+            <i class="material-icons" style="margin: 0px 10px 0 0;float:left;">warning</i>
+            <p> <%= flash[:alert] %></p>
+          </div>
+        </div>
+      <% end %>
       <div class="row">
         <div class="input-field">
-          <input id="email" type="email" class="validate">
-          <label for="email" data-error="E-mail inválido">E-mail</label>
+          <%= f.text_field :email, type: "email", :class => 'validate' %>
+          <%= f.label :email, "E-mail", :for=>"email", 'data-error'=>'E-mail inválido' %>
         </div>
       </div>
       <div class="row">
         <div class="input-field">
-          <input id="password" type="password" class="validate">
-          <label for="password">Senha</label>
+          <%= f.text_field :password, type: "password", :class => "validate" %>
+          <%= f.label :password, "Senha", :for=>"password" %>
         </div>
       </div>
       <div class="row">
@@ -30,13 +31,11 @@
       </div>
       <div class="row row-form-submit">
         <div class="row-remember">
-          <a href="#">Esqueceu sua senha?</a>
+          <%=link_to "Esqueceu sua senha?", { :controller => "painel", :action => "esqueci_senha" } %>
         </div>
         <div class="row-submit">
-          <a class="btn disabled">Entrar</a>
+          <%= f.submit "Entrar", :class=>"btn" %> <!-- disabled -->
         </div>
       </div>
-    </form>
   </div>
-  <p class="terms">Editora Solução - Copyright © 2017</p>
-</div>
+<% end %>
