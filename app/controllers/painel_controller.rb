@@ -9,7 +9,7 @@ class PainelController < ApplicationController
 
   def login
     valores = params.require(:usuario).permit(:email,:password)
-    @user = Usuario.find_by(email: valores[:email])
+    @user = Usuario.where(email: valores[:email], tipo_conta: 0).first
 
     unless !@user.nil?
       flash[:alert] = "O email informado não existe!"
