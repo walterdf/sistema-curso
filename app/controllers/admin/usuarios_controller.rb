@@ -10,14 +10,16 @@ class Admin::UsuariosController < ApplicationController
     @valorEmail = "%#{params[:email]}%"
 
     @num_result = Usuario
-        .where(" usuarios.nome_completo like ?
+        .where(" usuarios.tipo_conta = 0
+        AND usuarios.nome_completo like ?
         AND usuarios.email like ?
         ", @valorNome, @valorEmail).length
 
     @num_result = (Float(@num_result) / Float(@limit_page)).ceil
 
     @usuarios = Usuario
-        .where(" usuarios.nome_completo like ?
+        .where(" usuarios.tipo_conta = 0
+        AND usuarios.nome_completo like ?
         AND usuarios.email like ?
         ", @valorNome, @valorEmail)
         .limit(@limit_page).offset((@page == 1 ? 0 : ((@page.to_i * @limit_page.to_i) - @limit_page.to_i) ));
