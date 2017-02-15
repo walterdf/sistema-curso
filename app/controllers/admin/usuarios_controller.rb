@@ -24,6 +24,7 @@ class Admin::UsuariosController < ApplicationController
   end
 
   def delete
+    Usuariocurso.where(usuario_id: params[:id]).destroy_all
     Usuario.find(params[:id]).destroy
     flash[:notice] = "Usuário removido com sucesso!"
     redirect_to :action => "index"

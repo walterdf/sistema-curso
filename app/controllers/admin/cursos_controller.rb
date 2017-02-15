@@ -21,7 +21,10 @@ class Admin::CursosController < ApplicationController
   end
 
   def delete
-    Curso.find(params[:id]).destroy
+    Usuariocurso.where(curso_id: params[:id]).destroy_all
+    Curso.where(id: params[:id]).destroy_all
+    Video.where(curso_id: params[:id]).destroy_all
+
     flash[:notice] = "Curso removido!"
     redirect_to :action => "index"
   end
