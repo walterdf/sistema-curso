@@ -1,0 +1,50 @@
+<div id="breadcrumbs-wrapper">
+   <!-- Search for small screen -->
+     <div class="header-search-wrapper grey hide-on-large-only">
+         <i class="mdi-action-search active"></i>
+         <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Buscar Curso..">
+     </div>
+   <div class="container">
+     <div class="row">
+       <div class="col s12 m12 l12">
+         <h5 class="breadcrumbs-title">Cursos</h5>
+         <ol class="breadcrumbs">
+             <li><a href="/meus_cursos">Meus Cursos</a></li>
+             <li><%=@curso_nome %></li>
+         </ol>
+       </div>
+     </div>
+   </div>
+ </div>
+ <div class="container container-dash" style="padding: 0px 20px;">
+   <% if flash[:alert] %>
+   <div class="row" style="margin-bottom:20px;">
+       <div class="col s6" style="padding: 0;">
+           <div id="card-alert" class="card red" style="margin: 20px 0 0 0;">
+               <div class="card-content white-text" style="padding: 6px 0 13px 15px;">
+                   <p>
+                       <i class="mdi-alert-error"></i>
+                       <%= flash[:alert] %></p>
+               </div>
+           </div>
+       </div>
+   </div>
+   <% else %>
+     <h1><%=@curso_nome %></h1>
+     <p><%=@curso_descricao %></p>
+   <div class="col s12 m8 l9">
+       <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
+           <% @videos.each do |v| %>
+             <li>
+                 <div class="collapsible-header">
+                     <i class="mdi-hardware-keyboard-arrow-right"></i>
+                     <%=v.name %> - <%=v.duration %></div>
+                 <div class="collapsible-body" style="">
+                     <p><%=v.html.html_safe %></p>
+                 </div>
+             </li>
+           <% end %>
+       </ul>
+   </div>
+   <% end %>
+ </div>

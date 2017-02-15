@@ -1,0 +1,76 @@
+<div id="breadcrumbs-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col s4">
+                <h5 class="breadcrumbs-title">FAQ</h5>
+                <ol class="breadcrumbs">
+                    <li>
+                        <a href="faq/novo" class="waves-effect waves-light btn">
+                            <i class="mdi-content-add left"></i>Nova Pergunta</a>
+                    </li>
+                </ol>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container container-dash" style="padding: 20px;">
+    <% if flash[:notice] %>
+    <div class="row" style="margin-bottom:20px;">
+        <div class="col s6">
+            <div id="card-alert" class="card green" style="margin:0;">
+                <div class="card-content white-text" style="padding: 6px 0 13px 15px;">
+                    <p>
+                        <i class="mdi-navigation-check"></i>
+                        <%= flash[:notice] %>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% end %>
+    <div id="card-widgets">
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th data-field="id">Nome</th>
+                    <th data-field="email">Email</th>
+                    <th data-field="edit" style="width:100px;">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @faq.each do |a| %>
+                <tr>
+                    <td><%=a.pergunta %></td>
+                    <td><%=a.resposta %></td>
+                    <td>
+                        <a class="btn-floating" href="faq/edit/<%=a.id %>">
+                            <i class="mdi-image-edit" style="font-size:25px;"></i>
+                        </a>
+                        <a class="btn-floating" onclick="return confirm('Tem certeza que deseja excluir?')" href="faq/delete/<%=a.id %>">
+                            <i class="mdi-content-clear" style="font-size:25px;"></i>
+                        </a>
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    <ul class="pagination">
+        <li class="<%=(@page == 1 ? "disabled" : "waves-effect" ) %>">
+            <a href="<%=(@page == 1 ? "javascript: void(0)" : "faq?pg=#{(@page-1)}") %>">
+                <i class="mdi-navigation-chevron-left"></i>
+            </a>
+        </li>
+        <% for i in 1..@num_result %>
+        <li class="<%=(@page == i ? "active" : "waves-effect" )  %>">
+            <a href="faq?pg=<%=i %>"><%= i %></a>
+        </li>
+        <% end %>
+        <li class="<%=(@page == @num_result ? "disabled" : "waves-effect" )  %>">
+            <a href="<%=(@page == @num_result ? "javascript: void(0)" : "faq?pg=#{(@page+1)}") %>">
+                <i class="mdi-navigation-chevron-right"></i>
+            </a>
+        </li>
+    </ul>
+</div>

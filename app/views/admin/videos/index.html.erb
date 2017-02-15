@@ -1,0 +1,68 @@
+<div id="breadcrumbs-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col s4">
+                <h5 class="breadcrumbs-title"><%=@curso.name %></h5>
+                <ol class="breadcrumbs">
+                    <li>
+                      <a href="usuarios">
+                          <%= link_to "< Voltar", :controller => "cursos", :action => "index" %></a>
+                    </li>
+                    <li>
+                        <a href="videos/novo?idcurso=<%=params[:idcurso] %>" class="waves-effect waves-light btn">
+                            <i class="mdi-content-add left"></i>Novo Vídeo</a>
+                    </li>
+                </ol>
+            </div>
+            <div class="col s8 right-align">
+                <h5 class="breadcrumbs-title">Vídeos</h5>
+                <div class="right">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container container-dash" style="padding: 20px;">
+    <% if flash[:notice] %>
+    <div class="row" style="margin-bottom:20px;">
+        <div class="col s6">
+            <div id="card-alert" class="card green" style="margin:0;">
+                <div class="card-content white-text" style="padding: 6px 0 13px 15px;">
+                    <p>
+                        <i class="mdi-navigation-check"></i>
+                        <%= flash[:notice] %>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% end %>
+    <div id="card-widgets">
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th data-field="name">Nome</th>
+                    <th data-field="date">Duração</th>
+                    <th data-field="edit" style="width:100px;">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @video.each do |a| %>
+                <tr>
+                    <td><%=a.name %></td>
+                    <td><%=a.duration %></td>
+                    <td>
+                        <a class="btn-floating" href="videos/edit/<%=a.id %>?idcurso=<%=params[:idcurso] %>">
+                            <i class="mdi-image-edit" style="font-size:25px;"></i>
+                        </a>
+                        <a class="btn-floating" onclick="return confirm('Tem certeza que deseja excluir esse vídeo?')" href="videos/delete/<%=a.id %>?idcurso=<%=params[:idcurso] %>">
+                            <i class="mdi-content-clear" style="font-size:25px;"></i>
+                        </a>
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

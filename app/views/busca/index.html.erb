@@ -1,0 +1,78 @@
+<div id="breadcrumbs-wrapper">
+    <!-- Search for small screen -->
+    <div class="header-search-wrapper grey hide-on-large-only">
+        <i class="mdi-action-search active"></i>
+        <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Buscar Curso..">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <h5 class="breadcrumbs-title">Cursos</h5>
+                <ol class="breadcrumbs">
+                    <li>
+                        <a href="/meus_cursos">Meus Cursos</a>
+                    </li>
+                    <li>Busca: "<%=@expressao %>"</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!--start container-->
+<div class="container container-dash">
+    <% if @qtd > 0 %>
+    <!--card widgets start-->
+    <div id="card-widgets">
+        <div class="row row-video">
+            <% @cursos.each do |c| %>
+            <!-- blog card -->
+            <div class="col s12 m12 l4">
+                <div class="blog-card">
+                    <div class="card">
+                        <div class="card-image waves-effect waves-block waves-light" onclick="location.href='/meus_cursos/curso/<%=c.id %>';">
+                            <img src="<%=c.url_thumb %>" alt="<%=c.name %>">
+                        </div>
+                        <ul class="card-action-buttons">
+                            <li>
+                                <a class="btn-floating waves-effect waves-light light-blue">
+                                    <i class="mdi-action-info activator"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="card-content">
+                            <p class="row">
+                                <span class="left">
+                                    <a href="/meus_cursos/curso/<%=c.id %>"><%=c.name %></a>
+                                </span>
+                                <span class="right"><%=c.qtd %>
+                                    vídeos</span>
+                            </p>
+                        </div>
+                        <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4">
+                                <i class="mdi-navigation-close right"></i>
+                                <%=c.name %></span>
+                            <p><%=c.descricao %></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- final card -->
+            <% end %>
+        </div>
+    </div>
+    <% else %>
+    <div class="row" style="margin-bottom:20px;">
+        <div class="col s6" style="padding: 0;">
+            <div id="card-alert" class="card orange">
+                <div class="card-content white-text" style="padding: 6px 0 13px 15px;">
+                    <p>
+                        <i class="mdi-alert-error"></i>
+                        Nenhum curso encontrado.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% end %>
+</div>
+<!--end container-->

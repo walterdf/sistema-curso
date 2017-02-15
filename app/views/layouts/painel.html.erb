@@ -10,22 +10,40 @@
     <title>Painel - Editora Solução</title>
     <link rel="icon" href="http://www.editorasolucao.com.br/media/favicon/default/icon.png" type="image/x-icon" />
     <link rel="shortcut icon" href="http://www.editorasolucao.com.br/media/favicon/default/icon.png" type="image/x-icon" />
-    <!-- CORE CSS-->
     <link href="<%="#{request.protocol}#{request.host_with_port}/" %>css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="<%="#{request.protocol}#{request.host_with_port}/" %>css/style.min.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <!-- Custome CSS-->
     <link href="<%="#{request.protocol}#{request.host_with_port}/" %>css/custom/custom.min.css" type="text/css" rel="stylesheet" media="screen,projection">
-
-
-    <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
-
-
     <link href="<%="#{request.protocol}#{request.host_with_port}/" %>js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="<%="#{request.protocol}#{request.host_with_port}/" %>js/plugins/jvectormap/jquery-jvectormap.css" type="text/css" rel="stylesheet" media="screen,projection">
-
     <style>
-
+    input[type=password].valid, input[type=password]:focus.valid, input[type=email].valid, input[type=email]:focus.valid { border-bottom: 1px solid; box-shadow: 0 1px 0 0 #CCC; }
+    .input-field input[type=email]:focus + label, .input-field input[type=password]:focus + label {color: #0366A7;}
+    .input-field input[type=email]:focus, .input-field input[type=password]:focus {border-bottom: 1px solid #0366A7;box-shadow: 0 1px 0 0 #0366A7;}
+    .btn, .btn-large {background-color: #0079B8 !important;}
+    .btn:hover, .btn-large:hover { background-color:#023150; }
+    .input-field .prefix.active { color:#023150; }
+    input[type=text]:focus:not([readonly]),input[type=password]:focus:not([readonly]),input[type=email]:focus:not([readonly]),input[type=url]:focus:not([readonly]),input[type=time]:focus:not([readonly]),input[type=date]:focus:not([readonly]),input[type=datetime-local]:focus:not([readonly]),input[type=tel]:focus:not([readonly]),input[type=number]:focus:not([readonly]),input[type=search]:focus:not([readonly]),textarea.materialize-textarea:focus:not([readonly]) {
+        border-bottom: 1px solid #0079B8;
+        box-shadow: 0 1px 0 0 #0079B8;
+    }
+    input[type=text]:focus:not([readonly])+label,input[type=password]:focus:not([readonly])+label,input[type=email]:focus:not([readonly])+label,input[type=url]:focus:not([readonly])+label,input[type=time]:focus:not([readonly])+label,input[type=date]:focus:not([readonly])+label,input[type=datetime-local]:focus:not([readonly])+label,input[type=tel]:focus:not([readonly])+label,input[type=number]:focus:not([readonly])+label,input[type=search]:focus:not([readonly])+label,textarea.materialize-textarea:focus:not([readonly])+label {
+        color: #0079B8;
+    }
+    input[type=text].valid,input[type=text]:focus.valid,input[type=password].valid,input[type=password]:focus.valid,input[type=email].valid,input[type=email]:focus.valid,input[type=url].valid,input[type=url]:focus.valid,input[type=time].valid,input[type=time]:focus.valid,input[type=date].valid,input[type=date]:focus.valid,input[type=datetime-local].valid,input[type=datetime-local]:focus.valid,input[type=tel].valid,input[type=tel]:focus.valid,input[type=number].valid,input[type=number]:focus.valid,input[type=search].valid,input[type=search]:focus.valid,textarea.materialize-textarea.valid,textarea.materialize-textarea:focus.valid {
+        border-bottom: 1px solid #0079B8;
+        box-shadow: 0 1px 0 0 #0079B8;
+    }
     </style>
+    <script type="text/javascript" src="<%="#{request.protocol}#{request.host_with_port}/" %>js/plugins/jquery-1.11.2.min.js"></script>
+    <script>
+    $(document).ready(function(){
+      $("input[name='Search']").keypress(function(e){
+        if(e.which == 13) {
+            location.href='/busca/'+$(this).val()+'';
+        }
+      });
+    });
+    </script>
   </head>
 
 <body>
@@ -47,10 +65,10 @@
                     </div>
                     <ul class="right hide-on-med-and-down">
                         <li>
-                          <a href="javascript:void(0);" class="waves-effect waves-block waves-light toggle-fullscreen"><i class="mdi-action-settings-overscan"></i></a>
+                          <a class="tooltipped waves-effect waves-block waves-light notification-button" data-position="bottom" data-delay="50" data-tooltip="(11) 3825-7299" data-tooltip-id="cc362e54-4015-bd15-f8d6-57652c35fd72"><i class="mdi-communication-phone"></i></a>
                         </li>
                         <li>
-                          <a href="javascript:void(0);" class="waves-effect waves-block waves-light notification-button"><i class="mdi-communication-phone"></i></a>
+                          <a href="javascript:void(0);" class="waves-effect waves-block waves-light toggle-fullscreen"><i class="mdi-action-settings-overscan"></i></a>
                         </li>
                     </ul>
                     <!-- notifications-dropdown -->
@@ -114,7 +132,7 @@
                 <li class="li-hover">
                   <div class="divider"></div>
                 </li>
-                <li class="bold <%= (controller_name == "painel") ? 'active' : '' %>">
+                <li class="bold <%= (controller_name == "meus_cursos") ? 'active' : '' %>">
                   <%=link_to raw("<i class=\"mdi-av-my-library-books\"></i> Meus Cursos"), meus_cursos_path, { :class => "waves-effect waves-cyan" } %>
                 </li>
                 <li class="bold <%= (controller_name == "dadoscadastrais") ? 'active' : '' %>">
@@ -150,89 +168,7 @@
             <aside id="right-sidebar-nav">
                 <ul id="chat-out" class="side-nav rightside-navigation">
                     <li class="li-hover">
-                    <a href="#" data-activates="chat-out" class="chat-close-collapse right"><i class="mdi-navigation-close"></i></a>
-                    <div id="right-search" class="row">
-                        <form class="col s12">
-                            <div class="input-field">
-                                <i class="mdi-action-search prefix"></i>
-                                <input id="icon_prefix" type="text" class="validate">
-                                <label for="icon_prefix">Search</label>
-                            </div>
-                        </form>
-                    </div>
-                    </li>
-                    <li class="li-hover">
                         <ul class="chat-collapsible" data-collapsible="expandable">
-                        <li>
-                            <div class="collapsible-header teal white-text active"><i class="mdi-social-whatshot"></i>Recent Activity</div>
-                            <div class="collapsible-body recent-activity">
-                                <div class="recent-activity-list chat-out-list row">
-                                    <div class="col s3 recent-activity-list-icon"><i class="mdi-action-add-shopping-cart"></i>
-                                    </div>
-                                    <div class="col s9 recent-activity-list-text">
-                                        <a href="#">just now</a>
-                                        <p>Jim Doe Purchased new equipments for zonal office.</p>
-                                    </div>
-                                </div>
-                                <div class="recent-activity-list chat-out-list row">
-                                    <div class="col s3 recent-activity-list-icon"><i class="mdi-device-airplanemode-on"></i>
-                                    </div>
-                                    <div class="col s9 recent-activity-list-text">
-                                        <a href="#">Yesterday</a>
-                                        <p>Your Next flight for USA will be on 15th August 2015.</p>
-                                    </div>
-                                </div>
-                                <div class="recent-activity-list chat-out-list row">
-                                    <div class="col s3 recent-activity-list-icon"><i class="mdi-action-settings-voice"></i>
-                                    </div>
-                                    <div class="col s9 recent-activity-list-text">
-                                        <a href="#">5 Days Ago</a>
-                                        <p>Natalya Parker Send you a voice mail for next conference.</p>
-                                    </div>
-                                </div>
-                                <div class="recent-activity-list chat-out-list row">
-                                    <div class="col s3 recent-activity-list-icon"><i class="mdi-action-store"></i>
-                                    </div>
-                                    <div class="col s9 recent-activity-list-text">
-                                        <a href="#">Last Week</a>
-                                        <p>Jessy Jay open a new store at S.G Road.</p>
-                                    </div>
-                                </div>
-                                <div class="recent-activity-list chat-out-list row">
-                                    <div class="col s3 recent-activity-list-icon"><i class="mdi-action-settings-voice"></i>
-                                    </div>
-                                    <div class="col s9 recent-activity-list-text">
-                                        <a href="#">5 Days Ago</a>
-                                        <p>Natalya Parker Send you a voice mail for next conference.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="collapsible-header light-blue white-text active"><i class="mdi-editor-attach-money"></i>Sales Repoart</div>
-                            <div class="collapsible-body sales-repoart">
-                                <div class="sales-repoart-list  chat-out-list row">
-                                    <div class="col s8">Target Salse</div>
-                                    <div class="col s4"><span id="sales-line-1"></span>
-                                    </div>
-                                </div>
-                                <div class="sales-repoart-list chat-out-list row">
-                                    <div class="col s8">Payment Due</div>
-                                    <div class="col s4"><span id="sales-bar-1"></span>
-                                    </div>
-                                </div>
-                                <div class="sales-repoart-list chat-out-list row">
-                                    <div class="col s8">Total Delivery</div>
-                                    <div class="col s4"><span id="sales-line-2"></span>
-                                    </div>
-                                </div>
-                                <div class="sales-repoart-list chat-out-list row">
-                                    <div class="col s8">Total Progress</div>
-                                    <div class="col s4"><span id="sales-bar-2"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
                         <li>
                             <div class="collapsible-header red white-text"><i class="mdi-action-stars"></i>Favorite Associates</div>
                             <div class="collapsible-body favorite-associates">
@@ -310,9 +246,6 @@
     Scripts
     ================================================ -->
 
-    <!-- jQuery Library -->
-    <script type="text/javascript" src="<%="#{request.protocol}#{request.host_with_port}/" %>js/plugins/jquery-1.11.2.min.js"></script>
-    <!--materialize js-->
     <script type="text/javascript" src="<%="#{request.protocol}#{request.host_with_port}/" %>js/materialize.min.js"></script>
     <!--scrollbar-->
     <script type="text/javascript" src="<%="#{request.protocol}#{request.host_with_port}/" %>js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
@@ -332,6 +265,7 @@
     <!--custom-script.js - Add your own theme custom JS-->
     <script type="text/javascript" src="<%="#{request.protocol}#{request.host_with_port}/" %>js/custom-script.js"></script>
     <!-- Toast Notification -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.11.2/jquery.mask.min.js"></script>
 </body>
 
 </html>

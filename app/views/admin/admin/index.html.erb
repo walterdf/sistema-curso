@@ -1,0 +1,40 @@
+<%= form_for :admin_user, url: {controller:"admin/admin", action: "login"}, :html => { :id => "formlogin" } do |f| %>
+  <div class="card">
+      <div class="row row-logo">
+        <h5>Administração</h5>
+      </div>
+      <% if flash[:alert] %>
+        <div id="card-alert" class="card red" style="margin-bottom:25px;">
+          <div class="card-content white-text" style="padding:0;">
+            <i class="material-icons" style="margin: 0px 10px 0 0;float:left;">warning</i>
+            <p> <%= flash[:alert] %></p>
+          </div>
+        </div>
+      <% end %>
+      <% if flash[:notice] %>
+        <div id="card-alert" class="card green" style="margin-bottom:25px;">
+          <div class="card-content white-text" style="padding:0;">
+            <i class="material-icons" style="margin: 0px 10px 0 0;float:left;">done</i>
+            <p> <%= flash[:notice] %></p>
+          </div>
+        </div>
+      <% end %>
+      <div class="row">
+        <div class="input-field">
+          <%= f.text_field :email, type: "email", :class => 'validate', 'autocomplete'=>'off' %>
+          <%= f.label :email, "E-mail", :for=>"email", 'data-error'=>'E-mail inválido' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field">
+          <%= f.text_field :password, type: "password", :class => "validate" %>
+          <%= f.label :password, "Senha", :for=>"password" %>
+        </div>
+      </div>
+      <div class="row row-form-submit">
+        <div class="row-submit">
+          <%= f.submit "Entrar", :id=>'btnSubmit' , :class=>"btn" %>
+        </div>
+      </div>
+  </div>
+<% end %>

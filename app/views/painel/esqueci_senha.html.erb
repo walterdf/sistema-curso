@@ -1,20 +1,78 @@
-<div class="card">
-    <div class="row row-logo">
-      <h5>Esqueceu sua senha?</h5>
-      <p>Informe seu e-mail abaixo para receber uma nova senha</p>
-    </div>
-    <div class="row">
-      <div class="input-field">
-        <input id="email" type="email" class="validate">
-        <label for="email" data-error="E-mail inválido">E-mail</label>
+<script>
+  $(document).ready(function(){
+    var _email = readCookie("email");
+
+    if(_email && validateEmail(_email)) {
+      $("#usuario_email").val(_email);
+      $("#btnSubmit").removeClass("disabled");
+    }
+
+    $('#formlogin').submit(function() {
+      createCookie("email",$("#usuario_email").val(),7);
+    });
+
+    $("#usuario_email").keypress(function(){
+        if(validateEmail($("#usuario_email").val())){
+            $("#btnSubmit").removeClass("disabled");
+        } else {
+            $("#btnSubmit").addClass("disabled");
+        }
+    });
+  });
+
+  function createCookie(name, value, days) {
+      if (days) {
+          var date = new Date();
+          date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+          var expires = "; expires=" + date.toGMTString();
+      }
+      else var expires = "";
+      document.cookie = name + "=" + value + expires + "; path=/";
+  }
+
+  function readCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+  }
+
+  function validateEmail(email) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+  }
+</script>
+<%= form_for :usuario, url: {action: "request_email"}, :html => { :id => "formlogin" } do |f| %>
+  <div class="card">
+      <div class="row row-logo">
+        <h5>Esqueceu sua senha?</h5>
+        <p>Informe seu e-mail abaixo para receber uma nova senha</p>
       </div>
-    </div>
-    <div class="row row-form-submit">
-      <div class="row-remember">
-        <%=link_to "Fazer login", { :controller => "painel", :action => "index" } %>
+      <% if flash[:alert] %>
+        <div id="card-alert" class="card red" style="margin-bottom:25px;">
+          <div class="card-content white-text" style="padding:0;">
+            <i class="material-icons" style="margin: 0px 10px 0 0;float:left;">warning</i>
+            <p> <%= flash[:alert] %></p>
+          </div>
+        </div>
+      <% end %>
+      <div class="row">
+        <div class="input-field">
+          <%= f.text_field :email, type: "email", :class => 'validate', 'autocomplete'=>'off' %>
+          <%= f.label :email, "E-mail", :for=>"email", 'data-error'=>'E-mail inválido' %>
+        </div>
       </div>
-      <div class="row-submit">
-        <a class="btn disabled">Resetar Senha</a>
+      <div class="row row-form-submit">
+        <div class="row-remember">
+          <%=link_to "Fazer login", { :controller => "painel", :action => "index" } %>
+        </div>
+        <div class="row-submit">
+          <%= f.submit "Resetar Senha", :id=>'btnSubmit' , :class=>"btn disabled" %>
+        </div>
       </div>
-    </div>
-</div>
+  </div>
+<% end %>

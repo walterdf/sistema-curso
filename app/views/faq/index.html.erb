@@ -1,1 +1,47 @@
-<h1>Faq</h1>
+<style>.collapsible-header { color:#0079B8; }</style>
+<div id="breadcrumbs-wrapper">
+    <!-- Search for small screen -->
+    <div class="header-search-wrapper grey hide-on-large-only">
+        <i class="mdi-action-search active"></i>
+        <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Buscar Curso..">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <h5 class="breadcrumbs-title">FAQ</h5>
+                <ol class="breadcrumbs">
+                    <li>Perguntas frequentes e respostas:</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container container-dash" style="padding: 0px 20px;">
+    <p>Dúvidas Gerais</p>
+    <% if flash[:notice] %>
+    <div class="row" style="margin-bottom:20px;">
+      <div class="col s4">
+      <div id="card-alert" class="card green" style="margin:0;">
+        <div class="card-content white-text" style="padding: 6px 0 13px 15px;">
+          <p><i class="mdi-navigation-check"></i> <%= flash[:notice] %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+    <% end %>
+    <div class="col s12 m8 l9">
+        <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
+            <% @listFaq.each do |faq| %>
+              <li>
+                  <div class="collapsible-header">
+                      <i class="mdi-hardware-keyboard-arrow-right"></i>
+                      <%= faq.pergunta.to_s %></div>
+                  <div class="collapsible-body" style="">
+                      <p><%= faq.resposta.to_s %></p>
+                  </div>
+              </li>
+            <% end %>
+        </ul>
+        <p>Caso tenha ficado alguma dúvida, entre em contato conosco através do nosso <%= link_to "Suporte!", {:controller => "suporte", :action => "index" } %> </p>
+    </div>
+</div>

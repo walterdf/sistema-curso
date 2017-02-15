@@ -1,4 +1,71 @@
-<%= form_for :usuario, url: {action: "login"} do |f| %>
+<script>
+  $(document).ready(function(){
+    var _email = readCookie("email");
+    var _pass = readCookie("pass");
+
+    if(_email && validateEmail(_email)) {
+      $("#usuario_email").val(_email);
+      $("#btnSubmit").removeClass("disabled");
+    }
+
+    if(_pass) $("#usuario_password").val(_pass);
+
+    if(_email || _pass) {
+      $('#filled-in-box').prop('checked', true);
+    } else {
+      $('#filled-in-box').prop('checked', false);
+    }
+
+    $('#formlogin').submit(function() {
+      if($('#filled-in-box').is(":checked")){
+        createCookie("email",$("#usuario_email").val(),7);
+        createCookie("pass",$("#usuario_password").val(),7);
+      } else {
+        eraseCookie("email");
+        eraseCookie("pass");
+      }
+    });
+
+    $("#usuario_email").keypress(function(){
+        if(validateEmail($("#usuario_email").val())){
+            $("#btnSubmit").removeClass("disabled");
+        } else {
+            $("#btnSubmit").addClass("disabled");
+        }
+    });
+  });
+
+  function createCookie(name, value, days) {
+      if (days) {
+          var date = new Date();
+          date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+          var expires = "; expires=" + date.toGMTString();
+      }
+      else var expires = "";
+      document.cookie = name + "=" + value + expires + "; path=/";
+  }
+
+  function readCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+  }
+
+  function eraseCookie(name) {
+      createCookie(name, "", -1);
+  }
+
+  function validateEmail(email) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+  }
+</script>
+<%= form_for :usuario, url: {action: "login"}, :html => { :id => "formlogin" } do |f| %>
   <div class="card">
       <div class="row row-logo">
         <h5>Painel de Acesso</h5>
@@ -11,9 +78,17 @@
           </div>
         </div>
       <% end %>
+      <% if flash[:notice] %>
+        <div id="card-alert" class="card green" style="margin-bottom:25px;">
+          <div class="card-content white-text" style="padding:0;">
+            <i class="material-icons" style="margin: 0px 10px 0 0;float:left;">done</i>
+            <p> <%= flash[:notice] %></p>
+          </div>
+        </div>
+      <% end %>
       <div class="row">
         <div class="input-field">
-          <%= f.text_field :email, type: "email", :class => 'validate' %>
+          <%= f.text_field :email, type: "email", :class => 'validate', 'autocomplete'=>'off' %>
           <%= f.label :email, "E-mail", :for=>"email", 'data-error'=>'E-mail inválido' %>
         </div>
       </div>
@@ -34,7 +109,7 @@
           <%=link_to "Esqueceu sua senha?", { :controller => "painel", :action => "esqueci_senha" } %>
         </div>
         <div class="row-submit">
-          <%= f.submit "Entrar", :class=>"btn" %> <!-- disabled -->
+          <%= f.submit "Entrar", :id=>'btnSubmit' , :class=>"btn disabled" %>
         </div>
       </div>
   </div>

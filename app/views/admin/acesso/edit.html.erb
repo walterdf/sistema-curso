@@ -1,0 +1,66 @@
+<div id="breadcrumbs-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <h5 class="breadcrumbs-title">Liberar Acesso</h5>
+                <ol class="breadcrumbs">
+                    <li><%=link_to "< Voltar", :controller => "acesso" , :action => "index", :iduser => params["iduser"] %></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<%= form_for :acesso, url: admin_acesso_update_path, :html => { :id => "formnovo" }, :method => :POST do |f| %>
+<!--start container-->
+<div class="container container-dash">
+    <% if flash[:alert] %>
+    <div class="row" style="margin-bottom:20px;">
+        <div class="col s6">
+            <div id="card-alert" class="card red" style="margin:0;">
+                <div class="card-content white-text" style="padding: 6px 0 13px 15px;">
+                    <p>
+                        <i class="mdi-alert-error"></i>
+                        <%= flash[:alert] %></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% end %>
+    <% if flash[:notice] %>
+    <div class="row" style="margin-bottom:20px;">
+        <div class="col s6">
+            <div id="card-alert" class="card green" style="margin:0;">
+                <div class="card-content white-text" style="padding: 6px 0 13px 15px;">
+                    <p>
+                        <i class="mdi-navigation-check"></i>
+                        <%= flash[:notice] %>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% end %>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= f.collection_select :curso, @curso, :id, :name, {prompt: 'Selecione um curso..', :selected => @usuariocurso.curso_id} %>
+        <%= f.label :curso, "E-mail", :for=>"disabled" %>
+      </div>
+    </div>
+    <div class="row" style="margin-top:20px;">
+      <div class="input-field col s12">
+        <%= f.text_field :data, type: "text", :class => "validate", :id => "data", :value => @usuariocurso.data.strftime('%d/%m/%Y') %>
+        <%= f.label :data, "Data", :for=>"data" %>
+      </div>
+    </div>
+    <div class="row" style="margin:30px 0 60px 0;">
+      <%= f.text_field :edit_id, type: "hidden", :class => "validate", :value => params[:id].to_i  %>
+      <%= f.text_field :usuario_id, type: "hidden", :class => "validate", :value => params[:iduser].to_i  %>
+      <button class="btn waves-effect waves-light " type="submit" name="action">Salvar Acesso</button>
+    </div>
+</div>
+<script>
+  $(document).ready(function(){
+    $("#data").mask('00/00/0000');
+  });
+</script>
+<% end %>

@@ -9,16 +9,73 @@
        <div class="col s12 m12 l12">
          <h5 class="breadcrumbs-title">Dados Cadastrais</h5>
          <ol class="breadcrumbs">
-             <li><%=link_to "Inicio", { :controller => "painel", :action => "index" } %></li>
-             <li>Edite os seus dados pessoais abaixo:</li>
+             <li>Edite os seus dados nos campos abaixo:</li>
          </ol>
        </div>
      </div>
    </div>
  </div>
-
+<%= form_for @user, url: dadoscadastrais_update_path, :html => { :id => "formdadoscadastrais" }, :method => :POST do |f| %>
   <!--start container-->
   <div class="container container-dash">
-      <h1>Teste</h1>
+    <% if flash[:alert] %>
+    <div class="row" style="margin-bottom:20px;">
+      <div class="col s4">
+      <div id="card-alert" class="card red" style="margin:0;">
+        <div class="card-content white-text" style="padding: 6px 0 13px 15px;">
+          <p><i class="mdi-alert-error"></i> <%= flash[:alert] %></p>
+        </div>
+      </div>
+      <p><i class="mdi-alert-error"></i> <%= flash[:alert] %></p>
+    </div>
+  </div>
+    <% end %>
+    <% if flash[:notice] %>
+    <div class="row" style="margin-bottom:20px;">
+      <div class="col s4">
+      <div id="card-alert" class="card green" style="margin:0;">
+        <div class="card-content white-text" style="padding: 6px 0 13px 15px;">
+          <p><i class="mdi-navigation-check"></i> <%= flash[:notice] %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+    <% end %>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= f.text_field :nome_completo, type: "text", :class => "validate" %>
+        <%= f.label :nome_completo, "Nome Completo", :for=>"nome_completo" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= f.text_field :email, type: "text", :class => "validate", :id => "disabled", :disabled => true %>
+        <%= f.label :email, "E-mail", :for=>"disabled" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <i class="mdi-maps-local-phone prefix"></i>
+        <%= f.text_field :telefone, type: "tel", :class => "validate", :id => "telefone" %>
+        <%= f.label :telefone, "Telefone", :for=>"icon_telephone" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <i class="mdi-hardware-phone-iphone prefix"></i>
+        <%= f.text_field :celular, type: "tel", :class => "validate", :id => "celular"  %>
+        <%= f.label :celular, "Celular", :for=>"icon_telephone" %>
+      </div>
+    </div>
+    <div class="row" style="margin:30px 0 60px 0;">
+      <button class="btn waves-effect waves-light " type="submit" name="action">Salvar Dados</button>
+    </div>
   </div>
   <!--end container-->
+  <script>
+    $(document).ready(function(){
+      $("#telefone").mask('(00) 0000-0000Z', {translation:  {'Z': {pattern: /[0-9]/, optional: true}}});
+      $("#celular").mask('(00) 0000-0000Z', {translation:  {'Z': {pattern: /[0-9]/, optional: true}}});
+    });
+  </script>
+<% end %>

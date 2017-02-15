@@ -16,164 +16,42 @@
      </div>
    </div>
  </div>
-
   <!--start container-->
-  <div class="container container-dash">
-
+  <div class="container container-dash" style="padding: 0px 20px;">
       <!--card widgets start-->
       <div id="card-widgets">
         <div class="row row-video">
+            <% @cursos.each do |c| %>
             <!-- blog card -->
             <div class="col s12 m12 l4">
                 <div class="blog-card" >
                 <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img src="https://i.vimeocdn.com/video/507579249_640.webp" alt="blog-img">
+                    <div class="card-image waves-effect waves-block waves-light" onclick="location.href='/meus_cursos/curso/<%=c.id %>';">
+                        <img src="<%=c.url_thumb %>" alt="<%=c.name %>">
                     </div>
                     <ul class="card-action-buttons">
-                        <li><a class="btn-floating waves-effect waves-light light-blue"><i class="mdi-action-info activator"></i></a>
+                        <li>
+                          <a class="btn-floating waves-effect waves-light light-blue">
+                            <i class="mdi-action-info activator"></i>
+                          </a>
                         </li>
                     </ul>
                     <div class="card-content">
                         <p class="row">
-                          <span class="left"><a href="">Photoshop</a></span>
-                          <span class="right">48 vídeos</span>
+                          <span class="left"><a href="/meus_cursos/curso/<%=c.id %>"><%=c.name %></a></span>
+                          <span class="right"><%=c.qtd %> vídeos</span>
                         </p>
                     </div>
                     <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4"><i class="mdi-navigation-close right"></i> Apple MacBook Pro A1278 13"</span>
-                        <p>Here is some more information about this blog that is only revealed once clicked on.</p>
+                        <span class="card-title grey-text text-darken-4"><i class="mdi-navigation-close right"></i> <%=c.name %></span>
+                        <p><%=c.descricao %></p>
                     </div>
                 </div>
                 </div>
             </div>
-
-            <!-- blog card -->
-            <div class="col s12 m12 l4">
-                <div class="blog-card" >
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img src="https://i.vimeocdn.com/video/507579249_640.webp" alt="blog-img">
-                    </div>
-                    <ul class="card-action-buttons">
-                        <li><a class="btn-floating waves-effect waves-light light-blue"><i class="mdi-action-info activator"></i></a>
-                        </li>
-                    </ul>
-                    <div class="card-content">
-                        <p class="row">
-                          <span class="left"><a href="">Photoshop</a></span>
-                          <span class="right">48 vídeos</span>
-                        </p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4"><i class="mdi-navigation-close right"></i> Apple MacBook Pro A1278 13"</span>
-                        <p>Here is some more information about this blog that is only revealed once clicked on.</p>
-                    </div>
-                </div>
-                </div>
-            </div>
-
-            <!-- blog card -->
-            <div class="col s12 m12 l4">
-                <div class="blog-card" >
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img src="https://i.vimeocdn.com/video/507579249_640.webp" alt="blog-img">
-                    </div>
-                    <ul class="card-action-buttons">
-                        <li><a class="btn-floating waves-effect waves-light light-blue"><i class="mdi-action-info activator"></i></a>
-                        </li>
-                    </ul>
-                    <div class="card-content">
-                        <p class="row">
-                          <span class="left"><a href="">Photoshop</a></span>
-                          <span class="right">48 vídeos</span>
-                        </p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4"><i class="mdi-navigation-close right"></i> Apple MacBook Pro A1278 13"</span>
-                        <p>Here is some more information about this blog that is only revealed once clicked on.</p>
-                    </div>
-                </div>
-                </div>
-            </div>
-          </div>
-          <div class="row row-video">
-            <!-- blog card -->
-            <div class="col s12 m12 l4">
-                <div class="blog-card" >
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img src="https://i.vimeocdn.com/video/507579249_640.webp" alt="blog-img">
-                    </div>
-                    <ul class="card-action-buttons">
-                        <li><a class="btn-floating waves-effect waves-light light-blue"><i class="mdi-action-info activator"></i></a>
-                        </li>
-                    </ul>
-                    <div class="card-content">
-                        <p class="row">
-                          <span class="left"><a href="">Photoshop</a></span>
-                          <span class="right">48 vídeos</span>
-                        </p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4"><i class="mdi-navigation-close right"></i> Apple MacBook Pro A1278 13"</span>
-                        <p>Here is some more information about this blog that is only revealed once clicked on.</p>
-                    </div>
-                </div>
-                </div>
-            </div>
-
-            <!-- blog card -->
-            <div class="col s12 m12 l4">
-                <div class="blog-card" >
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img src="https://i.vimeocdn.com/video/507579249_640.webp" alt="blog-img">
-                    </div>
-                    <ul class="card-action-buttons">
-                        <li><a class="btn-floating waves-effect waves-light light-blue"><i class="mdi-action-info activator"></i></a>
-                        </li>
-                    </ul>
-                    <div class="card-content">
-                        <p class="row">
-                          <span class="left"><a href="">Photoshop</a></span>
-                          <span class="right">48 vídeos</span>
-                        </p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4"><i class="mdi-navigation-close right"></i> Apple MacBook Pro A1278 13"</span>
-                        <p>Here is some more information about this blog that is only revealed once clicked on.</p>
-                    </div>
-                </div>
-                </div>
-            </div>
-
-            <!-- blog card -->
-            <div class="col s12 m12 l4">
-                <div class="blog-card" >
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img src="https://i.vimeocdn.com/video/507579249_640.webp" alt="blog-img">
-                    </div>
-                    <ul class="card-action-buttons">
-                        <li><a class="btn-floating waves-effect waves-light light-blue"><i class="mdi-action-info activator"></i></a>
-                        </li>
-                    </ul>
-                    <div class="card-content">
-                        <p class="row">
-                          <span class="left"><a href="">Photoshop</a></span>
-                          <span class="right">48 vídeos</span>
-                        </p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4"><i class="mdi-navigation-close right"></i> Apple MacBook Pro A1278 13"</span>
-                        <p>Here is some more information about this blog that is only revealed once clicked on.</p>
-                    </div>
-                </div>
-                </div>
-            </div>
+            <!-- final card -->
+            <% end %>
       </div>
-
   </div>
+</div>
   <!--end container-->

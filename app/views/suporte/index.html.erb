@@ -1,1 +1,60 @@
-<h1>Suporte</h1>
+<script>
+    $(document).on("keyup","#suporte_mensagem",mudaStatus).on("change","#suporte_assunto",mudaStatus);
+
+    function mudaStatus(){
+      if($("#suporte_mensagem").val().length > 0 && $("#suporte_assunto option:selected ").val() != "Selecione o passo"){
+        $(".btn").removeClass("disabled");
+      } else {
+        $(".btn").addClass("disabled");
+      }
+    }
+</script>
+<style>.btn, .btn-large {background-color: #0079B8 !important;}
+.dropdown-content li>a, .dropdown-content li>span { color:#0079B8; } textarea.materialize-textarea { min-height: 5rem; } </style>
+<div id="breadcrumbs-wrapper">
+    <!-- Search for small screen -->
+    <div class="header-search-wrapper grey hide-on-large-only">
+        <i class="mdi-action-search active"></i>
+        <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Buscar Curso..">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <h5 class="breadcrumbs-title">Suporte</h5>
+                <ol class="breadcrumbs">
+                    <li>Preencha o formulário abaixo que iremos retornar o mais breve possível!</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<%= form_for :suporte, url: suporte_post_path, :html => { :id => "formsuporte" }, :method => :POST do |f| %>
+<div class="container container-dash" style="padding: 20px 10px;">
+  <% if flash[:notice] %>
+  <div class="row" style="margin-bottom:20px;">
+    <div class="col s6">
+      <div id="card-alert" class="card green" style="margin:0;">
+        <div class="card-content white-text" style="padding: 6px 0 13px 15px;">
+          <p><i class="mdi-navigation-check"></i> <%= flash[:notice] %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  <div class="row">
+      <div class="input-field col s12">
+        <%= f.select :assunto, [['Selecione o passo','Selecione o passo'],['Dúvida', 'Dúvida'], ['Sugestão', 'Sugestão'], ['Reclamação', 'Reclamação'], ['Outros Assuntos', 'Outros Assuntos']], disabled: ['Selecione o passo','Selecione o passo'], selected: ['Selecione o passo','Selecione o passo'] %>
+        <label>Assunto</label>
+      </div>
+  </div>
+  <div class="row">
+      <div class="input-field col s12">
+          <%= f.text_area :mensagem, :class => "materialize-textarea" %>
+          <%= f.label :mensagem, "Mensagem" %>
+      </div>
+  </div>
+  <div class="row" style="margin:30px 0 60px 0;">
+      <button class="btn waves-effect waves-light disabled" type="submit" name="action">Enviar Mensagem</button>
+  </div>
+</div>
+<% end %>
