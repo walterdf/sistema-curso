@@ -4,7 +4,7 @@ class Admin::VideosController < ApplicationController
 
   def index
     if params[:idcurso].present?
-      @curso = Curso.find(params[:idcurso])
+      @curso = Curso.find_by(id: params[:idcurso])
       @video = Video.where(curso_id: params[:idcurso]);
     else
       redirect_to :controller => "cursos", :action => "index"
@@ -18,6 +18,7 @@ class Admin::VideosController < ApplicationController
   end
 
   def novo
+    @video = Video.new
   end
 
   def create
@@ -37,7 +38,7 @@ class Admin::VideosController < ApplicationController
   end
 
   def edit
-    @video = Video.find_by(id: params[:idcurso])
+    @video = Video.find(params[:id])
   end
 
   def update

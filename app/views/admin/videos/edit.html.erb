@@ -10,7 +10,7 @@
         </div>
     </div>
 </div>
-<%= form_for :video, url: admin_videos_update_path, :html => { :id => "formnovo" }, :method => :POST do |f| %>
+<%= form_for @video, url: admin_videos_update_path, :html => { :id => "formnovo" }, :method => :POST do |f| %>
 <!--start container-->
 <div class="container container-dash">
     <% if flash[:alert] %>
